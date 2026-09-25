@@ -1,21 +1,11 @@
-# AI Exam Tutor — visual + AI build
+# AI Exam Tutor — Clean Build v4
 
-Private-study prototype for the supplied January 2026 Pearson Edexcel IAL Biology Unit 1 papers.
+Fixes in this build:
+- Starts with a fresh v4 local-storage namespace, so old answers/marks/drawings do not appear.
+- Question and mark-scheme crops are embedded in `image-data.js`, so they still display even if GitHub folder uploads are missed.
+- Original crop folders are also included as a fallback.
+- MCQs mark instantly without an AI call.
+- Drawing marking sends the student drawing + exact original question crop + exact official mark-scheme crop in the same multimodal request.
+- Full question paper and mark scheme remain available as fallbacks.
 
-Features:
-- Original question-paper pages embedded for every question so diagrams, graphs, tables and photos remain visible.
-- Original mark-scheme pages shown after an attempt.
-- Text, MCQ and drawing answer modes.
-- Drawing canvas with mouse/trackpad/Apple Pencil support, undo and clear.
-- AI marking through an OpenRouter key supplied in the browser session.
-- Drawing image is sent to the AI for vision marking when the selected free model supports image input.
-- Local fallback marker for text/MCQ answers.
-- Confidence rating, previous/next navigation, progress, retry flow and on-device autosave using localStorage.
-- Original PDFs remain bundled and accessible.
-
-Security note: do not commit an API key to GitHub. The key is entered at runtime and stored only in sessionStorage.
-
-GitHub Pages: upload the *contents* of this folder to the repository root, commit, and Pages will redeploy automatically.
-
-## Question-specific visual crops
-This build displays only the relevant region(s) of the original supplied Pearson question paper for each sub-question. Required stimulus such as graphs, tables, diagrams and photographs is retained. After marking, only the corresponding mark-scheme entry is displayed. A “View full question paper / mark scheme” link remains available.
+Upload ALL root files to GitHub. The most important files are `index.html`, `app.js`, `styles.css`, `api-config.js`, and `image-data.js`. Never put your OpenRouter key in GitHub.

@@ -6,4 +6,4 @@
 /* Question-specific source crops */
 .source-pages{display:flex;flex-direction:column;gap:14px;margin:12px 0 20px}.question-crop{margin:0;border:1px solid #dfe3ee;border-radius:14px;overflow:hidden;background:white;box-shadow:0 6px 20px rgba(18,28,61,.06)}.question-crop img{display:block;width:100%;height:auto;background:white}.official-ms .question-crop{border-color:#d9dff7}.open-page{display:inline-block;margin:2px 0 8px;font-size:13px}.paper-shot{display:none}
 
-.mark-confidence{float:right;font-size:11px;padding:4px 8px;border-radius:999px;background:#eef2ff;color:#445}.mark-confidence.high{background:#e9f8f2;color:#13765a}.mark-confidence.low{background:#fff1f0;color:#a33}.check-warning{background:#fff8e6;border:1px solid #f2dfad;padding:10px;border-radius:9px;color:#715500}.manual-review{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}.manual-review span{font-size:13px;font-weight:750;margin-right:auto}
+.image-error{padding:28px;border:1px dashed #c9ced8;border-radius:12px;text-align:center;color:#687086;background:#fafbfc}
