@@ -58,6 +58,28 @@ const visualMap={
  '9(a)':{qp:[28,29],ms:[26,27]},'9(b)(i)':{qp:[30],ms:[28]},'9(b)(ii)':{qp:[30],ms:[28]},'9(b)(iii)':{qp:[31],ms:[29]},'9(b)(iv)':{qp:[31],ms:[29]},'9(b)(v)':{qp:[32],ms:[30]}
 };
 const drawingQuestions=new Set(['6(a)']);
+const app=document.getElementById('app');
+const defaultState={view:'papers',paper:null,qi:0,answers:{},results:{},confidence:{}};
+let state={...defaultState};
+try{
+  const saved=JSON.parse(localStorage.getItem('examTutorState_v6')||'null');
+  if(saved&&typeof saved==='object') state={...defaultState,...saved,answers:saved.answers||{},results:saved.results||{},confidence:saved.confidence||{}};
+}catch(e){ state={...defaultState}; }
+if(state.paper&&state.paper.id) state.paper=papers.find(p=>p.id===state.paper.id)||null;
+function persist(){
+  try{localStorage.setItem('examTutorState_v6',JSON.stringify({...state,paper:state.paper?{id:state.paper.id}:null}))}catch(e){}
+}
+function go(view){state.view=view;if(view==='papers'){state.paper=null;state.qi=0}persist();render()}
+function openPaper(id){state.paper=papers.find(p=>p.id===id)||papers[0];state.view='questions';state.qi=0;persist();render()}
+function openQ(i){state.qi=Math.max(0,Math.min(qs.length-1,Number(i)||0));state.view='viewer';persist();render()}
+function prevQ(){if(state.qi>0){state.qi--;persist();render()}}
+function nextQ(){if(state.qi<qs.length-1){state.qi++;persist();render()}}
+function setConfidence(v){let key=state.paper.id+'-'+state.qi;state.confidence[key]=v;persist();render()}
+function resetProgress(){if(!state.paper)return;let prefix=state.paper.id+'-';for(const k of Object.keys(state.answers))if(k.startsWith(prefix))delete state.answers[k];for(const k of Object.keys(state.results))if(k.startsWith(prefix))delete state.results[k];for(const k of Object.keys(state.confidence))if(k.startsWith(prefix))delete state.confidence[k];for(const k of Object.keys(drawData||{}))if(k.startsWith(prefix))delete drawData[k];localStorage.setItem('examTutorDrawings_v6',JSON.stringify(drawData||{}));persist();render()}
+function aiKey(){return sessionStorage.getItem('examTutorOpenRouterKey')||''}
+function saveAiKey(){let e=document.getElementById('aiKey'),v=(e?.value||'').trim();if(!v)return alert('Paste your OpenRouter API key first.');sessionStorage.setItem('examTutorOpenRouterKey',v);render()}
+function removeAiKey(){sessionStorage.removeItem('examTutorOpenRouterKey');render()}
+function esc(v){return String(v??'').replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[c]))}
 const STORAGE_VERSION='v6';
 const STATE_KEY='examTutorState_'+STORAGE_VERSION;
 const DRAW_KEY='examTutorDrawings_'+STORAGE_VERSION;
