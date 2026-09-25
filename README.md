@@ -16,3 +16,6 @@ Features:
 Security note: do not commit an API key to GitHub. The key is entered at runtime and stored only in sessionStorage.
 
 GitHub Pages: upload the *contents* of this folder to the repository root, commit, and Pages will redeploy automatically.
+
+## Question-specific visual crops
+This build displays only the relevant region(s) of the original supplied Pearson question paper for each sub-question. Required stimulus such as graphs, tables, diagrams and photographs is retained. After marking, only the corresponding mark-scheme entry is displayed. A “View full question paper / mark scheme” link remains available.
